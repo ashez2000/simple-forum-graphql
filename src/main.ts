@@ -1,5 +1,5 @@
 import { startStandaloneServer } from '@apollo/server/standalone';
-import { server } from './app.js';
+import { server } from './app';
 
 async function main() {
   const { url } = await startStandaloneServer(server, {

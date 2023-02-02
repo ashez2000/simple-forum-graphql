@@ -1,7 +1,5 @@
-import fs from 'node:fs';
 import { ApolloServer } from '@apollo/server';
-
-const typeDefs = fs.readFileSync('schema.graphql').toString();
+import { typeDefs } from './schema';
 
 const books = [
   {
