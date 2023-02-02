@@ -1,10 +1,28 @@
 export const typeDefs = `#graphql
-  type Book {
-    title: String
-    author: String
+  type User {
+    id: ID!
+    name: String!
+    email: String!
+    threads: [Thread!]!
+  }
+
+  type Thread {
+    id: ID!
+    content: String!
+    createdAt: String!
+    user: User!
+  }
+
+  type ThreadPayload {
+    errors: [String!]!
+    thread: Thread
   }
 
   type Query {
-    books: [Book]
+    threads: [Thread!]!
+  }
+
+  type Mutation {
+    threadCreate(content: String!): ThreadPayload!
   }
 `;
