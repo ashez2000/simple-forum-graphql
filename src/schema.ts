@@ -24,5 +24,6 @@ export const typeDefs = `#graphql
 
   type Mutation {
     threadCreate(content: String!): ThreadPayload!
+    threadDelete(id: String!): ThreadPayload!
   }
 `;

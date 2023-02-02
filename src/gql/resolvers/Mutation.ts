@@ -25,4 +25,9 @@ export const Mutation = {
     const thread = await db.thread.create({ data: { content } });
     return { errors: [], thread };
   },
+
+  threadDelete: async (parent: any, args: any, ctx: any, info: any) => {
+    const thread = await db.thread.delete({ where: { id: parseInt(args.id) } });
+    return { thread, error: [] };
+  },
 };
