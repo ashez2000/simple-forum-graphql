@@ -1,19 +1,19 @@
+import db from '../../../db/prisma';
 import { Thread } from '@prisma/client';
-import db from '../../db/prisma';
 
-type ThreadCreateDto = {
+export type ThreadCreateData = {
   content: string;
 };
 
-type ThreadPayload = {
+export type ThreadPayload = {
   errors: string[];
   thread: Thread | null;
 };
 
-export const Mutation = {
+export const ThreadMutation = {
   threadCreate: async (
     parent: any,
-    args: ThreadCreateDto,
+    args: ThreadCreateData,
     ctx: any,
     info: any
   ): Promise<ThreadPayload> => {
@@ -27,6 +27,11 @@ export const Mutation = {
   },
 
   threadDelete: async (parent: any, args: any, ctx: any, info: any) => {
+    const thread = await db.thread.delete({ where: { id: parseInt(args.id) } });
+    return { thread, error: [] };
+  },
+
+  signup: async (parent: any, args: any, ctx: any, info: any) => {
     const thread = await db.thread.delete({ where: { id: parseInt(args.id) } });
     return { thread, error: [] };
   },

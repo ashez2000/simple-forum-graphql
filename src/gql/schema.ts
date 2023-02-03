@@ -25,5 +25,7 @@ export const typeDefs = `#graphql
   type Mutation {
     threadCreate(content: String!): ThreadPayload!
     threadDelete(id: String!): ThreadPayload!
+    signup(name: String!, email: String!, password: String!): String!
+    signin(email: String!, password: String!): String!
   }
 `;

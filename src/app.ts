@@ -1,12 +1,14 @@
 import { ApolloServer } from '@apollo/server';
-import { typeDefs } from './schema';
+import { typeDefs } from './gql/schema';
 
 import { Query } from './gql/resolvers/Query';
-import { Mutation } from './gql/resolvers/Mutation';
+import { ThreadMutation } from './gql/resolvers/mutation/thread.mutation';
 
 const resolvers = {
   Query,
-  Mutation,
+  Mutation: {
+    ...ThreadMutation,
+  },
 };
 
 export const server = new ApolloServer({
