@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import config from '../../../config';
 import db from '../../../db/prisma';
 
 type UserCredential = {
@@ -10,14 +11,15 @@ type UserCreateData = {
   name: string;
 } & UserCredential;
 
+const signToken = (payload: any) => jwt.sign(payload, config.jwtSecret);
+
 // TODO: Input validation
 // TODO: Password hashing
 // TODO: Proper response and error handling
-// TODO: JWT func
 export const AuthMutation = {
   signup: async (parent: any, args: UserCreateData, ctx: any, info: any) => {
     const user = await db.user.create({ data: args });
-    const token = jwt.sign({ id: user.id }, 'asdfjkl;');
+    const token = signToken({ id: user.id });
     return token;
   },
 
@@ -26,7 +28,7 @@ export const AuthMutation = {
     const user = await db.user.findUnique({ where: { email } });
     if (!user) return 'Invalid Credentials';
     if (user.password !== args.password) return 'Invalid Credentials';
-    const token = jwt.sign({ id: user.id }, 'asdfjkl;');
+    const token = signToken({ id: user.id });
     return token;
   },
 };
